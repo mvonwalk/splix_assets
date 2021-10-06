@@ -24,7 +24,7 @@ function library:removeConnections()
     end
 end
 --
-function library:changeLightin(prop, val)
+function library:changeLighting(prop, val)
     current[prop] = current[prop] or light[prop]
     changed[prop] = val
     --
