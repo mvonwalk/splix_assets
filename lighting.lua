@@ -9,7 +9,7 @@ local oldnamecall
 local oldindex
 local oldnewindex
 --
-function library:addConnection(connection)
+function addConnection(connection)
     for i, v in pairs(getconnections(connection)) do
         v:Disable()
         disconnected[#disconnected + 1] = v
@@ -17,7 +17,7 @@ function library:addConnection(connection)
     end
 end
 --
-function library:removeConnections()
+function removeConnections()
     for z, x in pairs(disconnected) do 
         x:Enable() 
         disconnected[z] = nil 
@@ -29,24 +29,24 @@ function library:changeLighting(prop, val)
     current[prop] = current[prop] or light[prop]
     changed[prop] = val
     --
-    library:addConnection(light:GetPropertyChangedSignal(prop))
-    library:addConnection(light.Changed)
+    addConnection(light:GetPropertyChangedSignal(prop))
+    addConnection(light.Changed)
     --
     light[prop] = val
     --
-    library:removeConnections()
+    removeConnections()
 end
 --
 function library:removeLighting(prop)
     if current[prop] then
-        library:addConnection(light:GetPropertyChangedSignal(prop))
-        library:addConnection(light.Changed)
+        addConnection(light:GetPropertyChangedSignal(prop))
+        addConnection(light.Changed)
         --
         light[prop] = current[prop]
         current[prop] = nil
         changed[prop] = nil
         --
-        library:removeConnections()
+        removeConnections()
     end
 end
 --
