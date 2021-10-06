@@ -13,7 +13,6 @@ function addConnection(connection)
     for i, v in pairs(getconnections(connection)) do
         v:Disable()
         disconnected[#disconnected + 1] = v
-        warn("disabled") 
     end
 end
 --
@@ -21,7 +20,6 @@ function removeConnections()
     for z, x in pairs(disconnected) do 
         x:Enable() 
         disconnected[z] = nil 
-        warn("enabled")
     end
 end
 --
