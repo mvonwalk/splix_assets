@@ -1,3 +1,4 @@
+-- moonwalk @zzz@
 local light = game:GetService("Lighting")
 local library = {}
 local changed = {}
@@ -32,6 +33,17 @@ function library:changeLighting(prop, val)
     addConnection(light.Changed)
     --
     light[prop] = val
+    --
+    removeConnections()
+end
+--
+function library:removeLighting(prop)
+    addConnection(light:GetPropertyChangedSignal(prop))
+    addConnection(light.Changed)
+    --
+    light[prop] = current[prop]
+    current[prop] = nil
+    changed[prop] = nil
     --
     removeConnections()
 end
