@@ -29,24 +29,24 @@ function library:changeLighting(prop, val)
     current[prop] = current[prop] or light[prop]
     changed[prop] = val
     --
-    addConnection(light:GetPropertyChangedSignal(prop))
-    addConnection(light.Changed)
+    library:addConnection(light:GetPropertyChangedSignal(prop))
+    library:addConnection(light.Changed)
     --
     light[prop] = val
     --
-    removeConnections()
+    library:removeConnections()
 end
 --
 function library:removeLighting(prop)
     if current[prop] then
-        addConnection(light:GetPropertyChangedSignal(prop))
-        addConnection(light.Changed)
+        library:addConnection(light:GetPropertyChangedSignal(prop))
+        library:addConnection(light.Changed)
         --
         light[prop] = current[prop]
         current[prop] = nil
         changed[prop] = nil
         --
-        removeConnections()
+        library:removeConnections()
     end
 end
 --
