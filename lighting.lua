@@ -50,6 +50,12 @@ function library:removeLighting(prop)
     end
 end
 --
+function library:Unload()
+    for i,v in pairs(current) do
+        library:removeLighting(i)
+    end
+end
+--
 oldindex = hookmetamethod(game, "__index", function(self, prop)
     if not checkcaller() and self == light and current[prop] then
         return current[prop]
