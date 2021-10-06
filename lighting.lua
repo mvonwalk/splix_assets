@@ -38,14 +38,16 @@ function library:changeLighting(prop, val)
 end
 --
 function library:removeLighting(prop)
-    addConnection(light:GetPropertyChangedSignal(prop))
-    addConnection(light.Changed)
-    --
-    light[prop] = current[prop]
-    current[prop] = nil
-    changed[prop] = nil
-    --
-    removeConnections()
+    if current[prop] then
+        addConnection(light:GetPropertyChangedSignal(prop))
+        addConnection(light.Changed)
+        --
+        light[prop] = current[prop]
+        current[prop] = nil
+        changed[prop] = nil
+        --
+        removeConnections()
+    end
 end
 --
 oldindex = hookmetamethod(game, "__index", function(self, prop)
